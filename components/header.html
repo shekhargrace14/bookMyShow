@@ -1,15 +1,33 @@
-<section class="container">
-    <div class="row">
-        <div class="column logo ">
-            <img src="./assets/bookmyshowlogo.png" alt="">
-        </div>
-        <nav>
-            <div class="column">
-                <form action="">
+
+    <section class="container  mx-auto py-2">
+        <div class="row grid grid-flow-col grid-cols-[11%_89%] items-center">
+            <div class="column logo  ">
+                <img src="./assets/bookmyshowlogo.png" alt="">
+            </div>
+            <nav class="column grid grid-flow-col grid-cols-[3fr_2fr_110px_100px_40px] items-center justify-center ">
+                
+                <form action="" class="bg-white py-1 px-2 border-[1px] border-slate-200 rounded py-1">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" placeholder="Search for Movies, Events, Plays, Sports and Activities">
                 </form>
-            </div>
-        </nav>
-    </div>
-</section>
+                <div class=" py-1"></div>
+                <div class="location ">
+                    <select name="" id="">
+                        <option value="delhi">Delhi-NCR</option>
+                        <option value="pune">Pune</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="mumbai">Kolkata</option>
+                    </select>
+                </div>
+                <button class=" w-[70px] py-1  rounded bg-colorPrimary text-xs text-white hover:bg-colorPrimaryDark  " >Sign In</button>
+                <div class="menu  grid">
+                    <!-- <i class=" text-slate-500 text-2xl fa-solid fa-bars place-self-end "></i> -->
+                    <ion-icon class=" text-slate-500 text-2xl place-self-end " name="menu-outline"></ion-icon>
+                </div>
+               
+
+
+
+            </nav>
+        </div>
+    </section>
