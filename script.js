@@ -6,8 +6,8 @@ fetch("./data/hero.json")
     console.log(data)
     data.map((item)=>{
         track.insertAdjacentHTML("beforeend",`
-        <div class="column">
-            <img src="${item.img}" alt="">
+        <div class="column w-100%">
+            <img w-100% src="${item.img}" alt="">
         </div>
         `)
     })
