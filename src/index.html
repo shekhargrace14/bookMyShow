@@ -13,23 +13,73 @@
 </head>
 <body>
     <header ></header>
-
-    <section class="container mx-auto bg-slate-100 py-0 ">
+    <!-- hero starts from here  -->
+    <section class="container hero mx-auto pt-4 pb-12 ">
       <div class="row track flex  ">
       </div>           
     </section>
+    <!-- hero ends from here  -->
+
     <!-- movies section starts starts -->
 
-    <section class="container mx-auto  relative">
-      <ion-icon id="left" class="arrow bg-[#999999] p-2 text-2xl cursor-pointer absolute top-[38%] left-[-1rem] rounded-[50%]" name="chevron-back-outline"></ion-icon>
-      <div class="row moviesRow grid grid-flow-col auto-cols-fr-[1fr] gap-8 rounded overflow-hidden  scroll-smooth	"></div>
-      <ion-icon id="right" class="arrow bg-[#999999] p-2 text-2xl cursor-pointer absolute top-[38%] right-[-1rem] rounded-[50%]" name="chevron-forward-outline"></ion-icon>     
+    <section class="container movies mx-auto  relative ">
+      <ion-icon id="left" class="arrow bg-[#999999] p-2 text-2xl cursor-pointer absolute z-20 top-[38%] left-[-1rem] rounded-[50%]" name="chevron-back-outline"></ion-icon>
+      <div class="row moviesRow grid grid-flow-col grid-auto-columns-[ calc((100% / 5) -24px )] gap-8 rounded overflow-hidden  scroll-smooth relative z-0	"></div>
+      <ion-icon id="right" class="arrow bg-[#999999] p-2 text-2xl cursor-pointer absolute z-20  top-[38%] right-[-1rem] rounded-[50%]" name="chevron-forward-outline"></ion-icon>     
     </section>
-    <!-- movies section starts ends -->
-    
+    <!-- movies section ends -->
+    <!--  section starts  -->
+    <section class="container mx-auto py-16">
+      <div class="row">
+        <div class="column">
+          <img class="w-full" src="./assets/stream.avif" alt="">
+        </div>
+      </div>
+    </section>
+    <!--  section ends  -->
+
+    <!--  live starts  -->
+    <section class="container mx-auto pb-16">
+      <div class="row">
+        <div class="column grid grid-flow-col gap-4">
+          <img class="rounded" src="./assets/live/event1.avif" alt="">
+          <img class="rounded" src="./assets/live/event2.avif" alt="">
+          <img class="rounded" src="./assets/live/event3.avif" alt="">
+          <img class="rounded" src="./assets/live/event4.avif" alt="">
+          <img class="rounded" src="./assets/live/event5.avif" alt="">
+          <!-- <img class="rounded" src="./assets/live/event6.avif" alt=""> -->
+          <!-- <img class="rounded" src="./assets/live/event7.avif" alt=""> -->
+          <!-- <img class="rounded" src="./assets/live/event8.avif" alt=""> -->
+          <!-- <img class="rounded" src="./assets/live/event9.avif" alt=""> -->
+          <!-- <img class="rounded" src="./assets/live/event10.avif" alt=""> -->
+        </div>
+      </div>
+    </section>
+    <!--  live ends  -->
+    <!-- movies section starts starts -->
+    <div class="premiere bg-[#2b3149] py-16">
+      <section class="container mx-auto">
+        <div class="row pb-6 flex items-center">
+          <div class="column pr-6">
+            <ion-icon name="play" class="p-[1.1rem] bg-[#dd324c] text-[2.5rem] rounded-full text-white "></ion-icon>
+          </div>
+          <div class="column text-white ">
+            <h3 class="text-3xl uppercase font-bold">Premiere</h3>
+            <p>Watch new movies at home, every Friday</p>
+          </div>
+        </div>
+        <div class="row relative">
+          <ion-icon id="left" class="premiereArrow bg-[#999999] p-2 text-2xl cursor-pointer absolute z-20 top-[38%] left-[-1rem] rounded-[50%]" name="chevron-back-outline"></ion-icon>
+          <div class="column premiereRow grid grid-flow-col grid-auto-columns-[ calc((100% / 5) -24px )] gap-8 rounded overflow-hidden  scroll-smooth relative z-0	"></div>
+          <ion-icon id="right" class="premiereArrow bg-[#999999] p-2 text-2xl cursor-pointer absolute z-20  top-[38%] right-[-1rem] rounded-[50%]" name="chevron-forward-outline"></ion-icon>     
+        </div>
+      </section>
+    </div>
+    <!-- movies section ends -->
 
     <script src="./components/header.js"></script>
     <script src="./script.js"></script>
+    <!-- <script src="./multipleApiCall.js"></script> -->
 </body>
 </html>
 
