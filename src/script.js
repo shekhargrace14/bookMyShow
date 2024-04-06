@@ -53,7 +53,7 @@ function showMoviesData(data){
           </figure>
           
           <div class="info">
-            <h4 class="font-semibold">${items.title}</h4>
+            <h4 class="font-semibold text-2xl py-4">${items.title}</h4>
             <p class="genre">Action/Adventure/Animation/Comedy</p>
           </div>
         </div>
@@ -107,7 +107,7 @@ function premiereData(data){
         </figure>
         
         <div class="info">
-          <h4 class="font-semibold text-white">${items.title}</h4>
+          <h4 class="font-semibold text-white text-2xl py-4">${items.title}</h4>
           <p class="genre text-white">Action/Adventure/Animation/Comedy</p>
         </div>
       </div>
