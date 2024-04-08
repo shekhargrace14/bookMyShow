@@ -44,9 +44,7 @@ function fetchandDisplay(apiEndpoint, targetBox, clickHandler) {
         });
     });
 }
-
 // Click event handler to store clicked ID and redirect
-
 function handleImageClick(event) {
     const clickedId = event.target.getAttribute("alt");
     const clickedId1 = event.target.getAttribute("data-author");

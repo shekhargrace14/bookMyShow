@@ -3,7 +3,7 @@ let movies = document.querySelector(".movies")
 let moviesRow = document.querySelector(".moviesRow")
 let premiereRow = document.querySelector(".premiereRow")
 
-console.log(moviesRow)
+// console.log(moviesRow)
 
 
 fetch("./data/hero.json")
@@ -21,14 +21,28 @@ fetch("./data/hero.json")
     })
 })
 
+
+
+const apiEndpoints = {
+    movies : "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=185c7d1fa7ff15b5023522fae491e666",
+    discover : {
+      tv :"https://api.themoviedb.org/3/discover/tv?api_key=d7667b78097516f5e82e6955576dcf62",
+      movies : "https://api.themoviedb.org/3/discover/movie?api_key=d7667b78097516f5e82e6955576dcf62",
+    },
+    trending : {
+      tv : "https://api.themoviedb.org/3/trending/tv/day?api_key=d7667b78097516f5e82e6955576dcf62",
+      movies : "https://api.themoviedb.org/3/trending/movie/day?api_key=d7667b78097516f5e82e6955576dcf62",
+    },
+}
+
+  
 // ApiData starts here 
 
 async function ApiData(){
-    let resolve = await fetch("https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=185c7d1fa7ff15b5023522fae491e666");
+    let resolve = await fetch(apiEndpoints.movies);
     let data = await resolve.json();
-    console.log(data)
+    // console.log(data)
     showMoviesData(data)
-    premiereData(data)
     return data
 }
 ApiData()
@@ -47,8 +61,8 @@ function showMoviesData(data){
             <img class="rounded" src=" https://image.tmdb.org/t/p/w500${items.poster_path}" alt="">
             <div class="w-[100%] bg-black text-white  grid grid-flow-col px-16 py-1 rounded absolute bottom-0 left-0 ">
               <ion-icon class="pt-1 text-[primaryColor]" name="star"></ion-icon> 
-              ${items.vote_count}/10 	&nbsp; 
-              ${items.vote_average}  
+              ${items.vote_average.toFixed(1)}/10 	&nbsp; 
+              ${items.vote_count}  
             </div>
           </figure>
           
@@ -61,17 +75,17 @@ function showMoviesData(data){
     })
     let movieCard = document.querySelector(".card")
     // console.log(movieCard,"Movies Card")
-    movieSlider(movieCard)
+    let movieCardWidth = movieCard.offsetWidth
+    movieSlider(movieCardWidth)
 }
 
-function movieSlider(movieCard){
+function movieSlider(movieCardWidth){
 
 
-  let movieCardWidth = movieCard.offsetWidth
   console.log(movieCardWidth,"movieCardWidth")
 
   let arrows = movies.querySelectorAll(" .movies .arrow")
-  console.log(arrows,"arrows")
+  // console.log(arrows,"arrows")
   arrows.forEach((singleArrow)=>{
     singleArrow.addEventListener("click",event=>{
       // console.log(event.id);
@@ -92,26 +106,47 @@ movieSlider()
 // movies slider ends  here 
 
 // premiere slider starts  here 
+
+// ApiData starts here 
+
+async function secApiData(){
+  let resolve = await fetch(apiEndpoints.discover.tv);
+  let data = await resolve.json();
+  console.log(data)
+  premiereData(data)
+  return data
+}
+secApiData()
+// console.log("helllooooooo")
+// console.log(apiEndpoints.discover.movies)
+// ApiData ends here 
+
 function premiereData(data){
 
   data.results.map((items)=>{
+    if(items.poster_path === null){
+      return
+    }else{
+
     premiereRow.insertAdjacentHTML("beforeend",`
       <div class="column card ">
         <figure class="relative">
           <img class="rounded" src=" https://image.tmdb.org/t/p/w500${items.poster_path}" alt="">
           <div class="w-[100%] bg-black text-white grid grid-flow-col px-16 py-1 rounded absolute bottom-0 left-0 ">
             <ion-icon class="pt-1 text-[primaryColor]" name="star"></ion-icon> 
-            ${items.vote_count}/10 	&nbsp; 
-            ${items.vote_average}  
+            ${items.vote_average.toFixed(1)}/10 	&nbsp; 
+            ${items.vote_count}  
           </div>
         </figure>
         
         <div class="info">
-          <h4 class="font-semibold text-white text-2xl py-4">${items.title}</h4>
+          <h4 class="font-semibold text-white text-2xl py-4">${items.name}</h4>
           <p class="genre text-white">Action/Adventure/Animation/Comedy</p>
         </div>
       </div>
       `)
+    }
+
   })
   let premiereCard = premiereRow.querySelector(".card")
   console.log(premiereCard,"premiereCard")
