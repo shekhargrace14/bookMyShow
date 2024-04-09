@@ -47,63 +47,55 @@ function fetchandDisplay(apiEndpoint, targetBox, clickHandler){
         `;
         box.insertAdjacentHTML("beforeend", html);
       })
-      let card = document.querySelector(".card")
-      let cardWidth = card.offsetWidth
-      // console.log(card, "card")
-      // console.log(cardWidth, "cardWidth")
-      slider(cardWidth)
-    })
+  })
 }
 
-// let arrow = document.querySelectorAll(".arrow")
-// console.log(arrow, "arrow")
+// Click event handler to store clicked ID and redirect
 
-// function slider(cardWidth){
+function handleImageClick(event) {
+  const clickedId = event.target.getAttribute("alt");
+  const clickedId1 = event.target.getAttribute("data-author");
+  console.log("Clicked ID:", clickedId);
+  console.log("Clicked API:", clickedId1);
+  localStorage.setItem("clickedId", clickedId);
+  localStorage.setItem("clickedId1", clickedId1);
+  window.location.href = "series.html";
+}
 
-  // let carousels = document.querySelectorAll(".carousel")
-  // console.log(carousels, "carousels")
 
-  // let arrow = document.querySelectorAll(".arrow")
+const sliders = document.querySelectorAll(".carousel");
 
-  // console.log(arrow, "arrow")
-  // loop through APIs to fetch and display images
-  // arrow.forEach((singleArrow)=>{
-  //   singleArrow.addEventListener("click",()=>{
-  //     // console.log(singleArrow.id)
-  //     // console.log("its arrow")
-  //     if(arrow==="left"){
-  //       console.log("its left")
-  //     }else{
-  //       console.log("its right")
-  //     }
-      
-  //   })
-  // })
+sliders.forEach((slider) => {
+  const switchLeft = slider.parentElement.querySelector("#left");
+  const switchRight = slider.parentElement.querySelector("#right");
 
-//   carousels.forEach((singleCarousel)=>{
-//     console.log(singleCarousel, "singleCarousel")
-//     arrow.forEach((singleArrow)=>{
-//       singleArrow.addEventListener("click",()=>{
-//         // console.log(singleArrow.id)
-//         // console.log("its arrow")
-//         if(arrow==="left"){
-//           console.log("its left")
-//         }else{
-//           console.log("its right")
-//         }
-        
-//       })
-//     })
+  slider.addEventListener("scroll", function () {
+    if (slider.scrollLeft === 0) {
+      switchLeft.style.display = "none";
+    } else {
+      switchLeft.style.display = "block";
+    }
 
-//   })  
-// }
-// slider()
+    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
+      switchRight.style.display = "none";
+    } else {
+      switchRight.style.display = "block";
+    }
+  });
 
-// fetchandDisplay()
+  switchLeft.addEventListener("click", () => {
+    const scrollAmount = window.innerWidth;
+    slider.scrollTo({
+      left: slider.scrollLeft - scrollAmount,
+      behavior: "smooth",
+    });
+  });
 
-// function handleImageClick(event){
-//   const clickedId = event.target.getAttribute("alt");
-//   const clickedId1 = event.target.getAttribute("data-author");
-//   console.log("clicked ID:", clickedId);
-  
-// }
+  switchRight.addEventListener("click", () => {
+    const scrollAmount = window.innerWidth;
+    slider.scrollTo({
+      left: slider.scrollLeft + scrollAmount,
+      behavior: "smooth",
+    });
+  });
+});

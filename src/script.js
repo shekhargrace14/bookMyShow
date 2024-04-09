@@ -1,172 +1,143 @@
-let track = document.querySelector(".track")
-let movies = document.querySelector(".movies")
-let moviesRow = document.querySelector(".moviesRow")
-let premiereRow = document.querySelector(".premiereRow")
-
-// console.log(moviesRow)
-
-
+// hero starts here 
 fetch("./data/hero.json")
 .then((resolve)=>resolve.json())
 .then((data)=>{
-    // console.log(data)
-    // slice 4 has stopped the showing of the hero images 
-    let newData = data.slice(2)
+  // console.log(data)
+  // slice 4 has stopped the showing of the hero images 
+    let heroTrack = document.querySelector(".heroTrack")
+    let newData = data.slice(0)
     newData.map((item)=>{
-        track.insertAdjacentHTML("beforeend",`
+      heroTrack.insertAdjacentHTML("beforeend",`
         <div class="column w-full flex justify-center">
             <img class="w-full rounded" src="${item.img}" alt="">
         </div>
         `)
     })
-})
 
-
-
-const apiEndpoints = {
-    movies : "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=185c7d1fa7ff15b5023522fae491e666",
-    discover : {
-      tv :"https://api.themoviedb.org/3/discover/tv?api_key=d7667b78097516f5e82e6955576dcf62",
-      movies : "https://api.themoviedb.org/3/discover/movie?api_key=d7667b78097516f5e82e6955576dcf62",
-    },
-    trending : {
-      tv : "https://api.themoviedb.org/3/trending/tv/day?api_key=d7667b78097516f5e82e6955576dcf62",
-      movies : "https://api.themoviedb.org/3/trending/movie/day?api_key=d7667b78097516f5e82e6955576dcf62",
-    },
-}
-
+  })
   
-// ApiData starts here 
-
-async function ApiData(){
-    let resolve = await fetch(apiEndpoints.movies);
-    let data = await resolve.json();
-    // console.log(data)
-    showMoviesData(data)
-    return data
-}
-ApiData()
-
-// ApiData ends here 
-
-
-// movies slider starts here 
-
-function showMoviesData(data){
-
-    data.results.map((items)=>{
-        moviesRow.insertAdjacentHTML("beforeend",`
-        <div class="column card ">
-          <figure class="relative">
-            <img class="rounded" src=" https://image.tmdb.org/t/p/w500${items.poster_path}" alt="">
-            <div class="w-[100%] bg-black text-white  grid grid-flow-col px-16 py-1 rounded absolute bottom-0 left-0 ">
-              <ion-icon class="pt-1 text-[primaryColor]" name="star"></ion-icon> 
-              ${items.vote_average.toFixed(1)}/10 	&nbsp; 
-              ${items.vote_count}  
-            </div>
-          </figure>
-          
-          <div class="info">
-            <h4 class="font-semibold text-2xl py-4">${items.title}</h4>
-            <p class="genre">Action/Adventure/Animation/Comedy</p>
-          </div>
-        </div>
-        `)
-    })
-    let movieCard = document.querySelector(".card")
-    // console.log(movieCard,"Movies Card")
-    let movieCardWidth = movieCard.offsetWidth
-    movieSlider(movieCardWidth)
-}
-
-function movieSlider(movieCardWidth){
-
-
-  console.log(movieCardWidth,"movieCardWidth")
-
-  let arrows = movies.querySelectorAll(" .movies .arrow")
-  // console.log(arrows,"arrows")
-  arrows.forEach((singleArrow)=>{
-    singleArrow.addEventListener("click",event=>{
-      // console.log(event.id);
-      // console.log(singleArrow.id);
+function heroSlider(){
+  // console.log(trackWidth)
+  
+  let hero = document.querySelector(".hero")
+  let arrow = hero.querySelectorAll(".arrow")
+  // console.log(arrow)
+  
+  arrow.forEach((singleArrow)=>{
+    let heroTrack = document.querySelector(".heroTrack")
+    console.log(singleArrow)
+    singleArrow.addEventListener("click",()=>{
+      console.log(singleArrow.id)
       if(singleArrow.id === "left"){
-        console.log("left");
-        moviesRow.scrollLeft -= movieCardWidth*4 
-      }else{
-        console.log("right");
-        moviesRow.scrollLeft += movieCardWidth*4
+        // heroTrack+scrollLeft =+ heroTrack.offsetWidth;
+
+        
 
       }
     })
   })
 
 }
-movieSlider()
-// movies slider ends  here 
+heroSlider()
 
-// premiere slider starts  here 
+// hero ends here 
 
-// ApiData starts here 
 
-async function secApiData(){
-  let resolve = await fetch(apiEndpoints.discover.tv);
-  let data = await resolve.json();
-  console.log(data)
-  premiereData(data)
-  return data
-}
-secApiData()
-// console.log("helllooooooo")
-// console.log(apiEndpoints.discover.movies)
-// ApiData ends here 
 
-function premiereData(data){
+let apiEndPoint = [
 
-  data.results.map((items)=>{
-    if(items.poster_path === null){
-      return
-    }else{
+  "https://api.themoviedb.org/3/discover/movie?api_key=d7667b78097516f5e82e6955576dcf62",
+  "https://api.themoviedb.org/3/trending/movie/day?api_key=d7667b78097516f5e82e6955576dcf62",
+  "https://api.themoviedb.org/3/discover/movie?api_key=d7667b78097516f5e82e6955576dcf62",
+  "https://api.themoviedb.org/3/trending/movie/day?api_key=d7667b78097516f5e82e6955576dcf62",
 
-    premiereRow.insertAdjacentHTML("beforeend",`
+]
+
+let carousel = [
+  ".carouselBox1",
+  ".carouselBox2",
+  ".carouselBox3",
+  ".carouselBox4",
+  ".carouselBox5",
+]
+
+apiEndPoint.forEach((apiEndPoint,index)=>{
+    fetchAndDisplay(apiEndPoint,carousel[index]);
+});
+
+
+
+// fetch and display images 
+
+function fetchAndDisplay(apiEndPoint, carousel){
+
+  fetch(apiEndPoint)
+  .then((Response)=> Response.json())
+  .then((data)=>{
+    if(apiEndPoint===apiEndPoint[2]){
+      data.results.reverse();
+    }
+    // console.log(data.results)
+    data.results.map((item)=>{
+      const box = document.querySelector(carousel);
+      const html = `
       <div class="column card ">
-        <figure class="relative">
-          <img class="rounded" src=" https://image.tmdb.org/t/p/w500${items.poster_path}" alt="">
-          <div class="w-[100%] bg-black text-white grid grid-flow-col px-16 py-1 rounded absolute bottom-0 left-0 ">
-            <ion-icon class="pt-1 text-[primaryColor]" name="star"></ion-icon> 
-            ${items.vote_average.toFixed(1)}/10 	&nbsp; 
-            ${items.vote_count}  
-          </div>
-        </figure>
-        
-        <div class="info">
-          <h4 class="font-semibold text-white text-2xl py-4">${items.name}</h4>
-          <p class="genre text-white">Action/Adventure/Animation/Comedy</p>
+      <figure class="relative">
+        <img class="rounded" src=" https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.id}" data-author="${apiEndPoint}">
+        <div class="w-[100%] bg-black text-white  grid grid-flow-col px-8 py-1 rounded absolute bottom-0 left-0 ">
+          <ion-icon class="pt-1 text-[primaryColor]" name="star"></ion-icon> 
+          ${item.vote_average.toFixed(1)}/10 	&nbsp; 
+          ${item.vote_count}  
         </div>
+      </figure>  
+      <div class="info">
+
+        <h4 class="font-semibold text-2xl py-1 line-clamp-1 truncate text-ellipsis">${item.title}</h4>
+        <p class="genre line-clamp-2 truncate text-ellipsis">${item.overview}</p>
       </div>
-      `)
+      </div>
+      `;
+      box.insertAdjacentHTML("beforeend", html);
+    })
+  })
+}
+
+const sliders = document.querySelectorAll(".carousel");
+
+sliders.forEach((slider) => {
+  const switchLeft = slider.parentElement.querySelector("#left");
+  const switchRight = slider.parentElement.querySelector("#right");
+
+  slider.addEventListener("scroll", function () {
+    if (slider.scrollLeft === 0) {
+      switchLeft.style.display = "none";
+    } else {
+      switchLeft.style.display = "block";
     }
 
-  })
-  let premiereCard = premiereRow.querySelector(".card")
-  console.log(premiereCard,"premiereCard")
-  premiereSlider(premiereCard)
-}
+    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
+      switchRight.style.display = "none";
+    } else {
+      switchRight.style.display = "block";
+    }
+  });
 
-function premiereSlider(premiereCard){
-  let premiereCardWidth = premiereCard.offsetWidth
-  let arrow = document.querySelectorAll(".premiereArrow")
-  console.log(arrow)
-  arrow.forEach((singleArrow)=>{
-    singleArrow.addEventListener("click",()=>{
-      console.log(singleArrow.id, "hello")
-      if(singleArrow.id=== "left"){
-        premiereRow.scrollLeft -= premiereCardWidth*4;
-      }else{
-        premiereRow.scrollLeft += premiereCardWidth*4;
-      }
-    })
-  })
-}
-premiereSlider()
-// premiere slider ends  here 
+  switchLeft.addEventListener("click", () => {
+    const scrollAmount = slider.clientWidth;
+    slider.scrollTo({
+      left: slider.scrollLeft - scrollAmount -30,
+      behavior: "smooth",
+    });
+  });
+
+  switchRight.addEventListener("click", () => {
+    const scrollAmount = slider.clientWidth;
+    slider.scrollTo({
+      left: slider.scrollLeft + scrollAmount + 30,
+      behavior: "smooth",
+    });
+  });
+});
+
+// =============================xxxx===================================
+
