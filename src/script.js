@@ -25,15 +25,18 @@ function heroSlider(){
   
   arrow.forEach((singleArrow)=>{
     let heroTrack = document.querySelector(".heroTrack")
-    console.log(singleArrow)
+    let heroTrackWidth = heroTrack.clientWidth
+    // console.log(heroTrackWidth)
+  
     singleArrow.addEventListener("click",()=>{
-      console.log(singleArrow.id)
-      if(singleArrow.id === "left"){
-        // heroTrack+scrollLeft =+ heroTrack.offsetWidth;
+      // console.log(singleArrow.id)
+      heroTrack.scrollLeft += singleArrow.id === "left" ? -heroTrackWidth -8 : + heroTrackWidth +8;
+      // if(singleArrow.id === "left"){
+        // heroTrack.scrollLeft += heroTrackWidth;      
 
-        
-
-      }
+      // }else{
+        // heroTrack -= 
+      // }
     })
   })
 
@@ -62,14 +65,14 @@ let carousel = [
 ]
 
 apiEndPoint.forEach((apiEndPoint,index)=>{
-    fetchAndDisplay(apiEndPoint,carousel[index]);
+    fetchAndDisplay(apiEndPoint,carousel[index], handleImageClick);
 });
 
 
 
 // fetch and display images 
 
-function fetchAndDisplay(apiEndPoint, carousel){
+function fetchAndDisplay(apiEndPoint, carousel,handleImageClick ){
 
   fetch(apiEndPoint)
   .then((Response)=> Response.json())
@@ -82,6 +85,7 @@ function fetchAndDisplay(apiEndPoint, carousel){
       const box = document.querySelector(carousel);
       const html = `
       <div class="column card ">
+      <a href="./singleShowPage.html">
       <figure class="relative">
         <img class="rounded" src=" https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.id}" data-author="${apiEndPoint}">
         <div class="w-[100%] bg-black text-white  grid grid-flow-col px-8 py-1 rounded absolute bottom-0 left-0 ">
@@ -95,12 +99,30 @@ function fetchAndDisplay(apiEndPoint, carousel){
         <h4 class="font-semibold text-2xl py-1 line-clamp-1 truncate text-ellipsis">${item.title}</h4>
         <p class="genre line-clamp-2 truncate text-ellipsis">${item.overview}</p>
       </div>
+      </a>
       </div>
       `;
       box.insertAdjacentHTML("beforeend", html);
     })
+    const images = document.querySelectorAll(`${carousel} img`);
+    images.forEach((img) => {
+      img.addEventListener("click", handleImageClick);
+    });
   })
 }
+
+
+// event to store data in local Storage start
+function handleImageClick(event){
+  let imageAlt = event.target.getAttribute("alt");
+  let specificApi = event.target.getAttribute("data-author");
+  console.log(imageAlt)
+  console.log(specificApi)
+  localStorage.setItem("imageAlt", imageAlt);
+  localStorage.setItem("specificApi", specificApi);
+}
+handleImageClick()
+// event to store data in local Storage end
 
 const sliders = document.querySelectorAll(".carousel");
 
