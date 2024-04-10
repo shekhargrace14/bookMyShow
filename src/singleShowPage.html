@@ -11,35 +11,47 @@
 </head>
 <body>
     <header></header>
-    <section>
-        <div class="row container mx-auto grid grid-flow-col">
-            <div class="column">
-                <figure>
-                    <img src="" alt="" id="imageId">
-                    <p class="releaseDate"></p>
-                </figure>
-            </div>
-            <div class="column">
-                <h1>Movie title</h1>
-                <div>
-                    <div class="left"></div>
-                    <div class="right">
-                        <button>I'm Interested</button>
+    <section class=" overflow-hidden bg-black">
+        <div class="container mx-auto relative ">
+            <div class="row grid grid-flow-col grid-cols-[3fr_5fr_4fr] gap-8 py-12 relative z-20 text-white bg-gradient-to-r from-[rgba(0,0,0,1)] to-[rgba(0,0,0,.1)]">
+                <div class="column">
+                    <figure>
+                        <img src="" alt="" id="imageId" class="rounded">
+                        <p class="releaseDate"></p>
+                    </figure>
+                </div>
+                <div class="column my-4 grid content-center">
+                    <div class="">
+                        <h1 class="text-4xl font-bold title"></h1>
+                        <div class="w-fit bg-[#333333]  text-white grid grid-flow-col align-center rounded py-4 px-4 my-2">
+                            <div class="left grid grid-flow-col  ">
+                                <ion-icon class="pt-1 text-[#f84464]" name="star"></ion-icon> 
+                                <p class="vote_average ml-4">vote_average.toFixed(1)/10</p>
+                                <p class="vote_count mx-4">vote_count</p>
+                            </div>
+                            <div class="right">
+                                <button class="bg-white text-black py-2 px-2 font-semibold rounded">I'm Interested</button>
+                            </div>
+                        </div>
+                        <div class="w-fit bg-white text-black p-2 mb-2 rounded">2D,3D,IMAX 3D,IMAX 2D</div>
+                        <div class="w-fit bg-white text-black p-2 rounded">Hindi, Malayalam, Telugu, Tamil, Kannada</div>
+                        <div class="my-2">
+                            <p>Duration . Action/Comedy/Thriller . UA</p>
+                        </div>
+                        <button class="w-fit bg-[#f84464] text-white py-4 px-16 my-4 font-semibold rounded">Book Tickets</button>
                     </div>
                 </div>
-                <div>2D,3D,IMAX 3D,IMAX 2D</div>
-                <div>Hindi, Malayalam, Telugu, Tamil, Kannada</div>
-                <div>
-                    <p>Duration . Action/Comedy/Thriller . UA</p>
+                <div class="column grid justify-end ">
+                    <button class="bg-[#333333] py-2 px-4 mr-2 h-fit rounded grid grid-flow-col align-center">
+                        <ion-icon name="share-social-outline" class="text-4xl pr-2 "></ion-icon>
+                        <p class="text-2xl">Share</p>
+                    </button>
                 </div>
-                <button>Book Tickets</button>
             </div>
-
-            <div class="column">
-                <ion-icon name="share-social-outline"></ion-icon>
-            </div>
+            <img src="" alt="" class="bg absolute top-0 w-[100%] z-0">
         </div>
-        <div class="bg"></div>
+     
+     
     </section>
     <footer></footer>
     <script src="./components/header.js"></script>

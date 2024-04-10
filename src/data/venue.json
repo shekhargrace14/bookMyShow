@@ -1,0 +1,47 @@
+[
+    {
+        "venueName" : "Cinepolis: Cross River Mall, Shahdara",
+        "showTime" : {
+            "morning":"10:00 AM",
+            "afternoon":"02:00 PM",
+            "evening":"06:00 PM",
+            "night":"10:00 PM"
+        }
+    },
+    {
+        "venueName" : "Cinepolis: DLF Avenue, Saket",
+        "showTime" : {
+            "morning":"10:00 AM",
+            "afternoon":"02:00 PM",
+            "evening":"06:00 PM",
+            "night":"10:00 PM"
+        }
+    },
+    {
+        "venueName" : "Cinepolis: Janak Cinema, New Delhi",
+        "showTime" : {
+            "morning":"10:00 AM",
+            "afternoon":"02:00 PM",
+            "evening":"06:00 PM",
+            "night":"10:00 PM"
+        }
+    },
+    {
+        "venueName" : "Cinepolis: Pacific NSP2, Delhi",
+        "showTime" : {
+            "morning":"10:00 AM",
+            "afternoon":"02:00 PM",
+            "evening":"06:00 PM",
+            "night":"10:00 PM"
+        }
+    },
+    {
+        "venueName" : "Cinepolis: V3S East Centre (New)",
+        "showTime" : {
+            "morning":"10:00 AM",
+            "afternoon":"02:00 PM",
+            "evening":"06:00 PM",
+            "night":"10:00 PM"
+        }
+    }
+]

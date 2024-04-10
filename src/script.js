@@ -114,14 +114,13 @@ function fetchAndDisplay(apiEndPoint, carousel,handleImageClick ){
 
 // event to store data in local Storage start
 function handleImageClick(event){
-  let imageAlt = event.target.getAttribute("alt");
+  imageAlt = event.target.getAttribute("alt");
   let specificApi = event.target.getAttribute("data-author");
   console.log(imageAlt)
   console.log(specificApi)
   localStorage.setItem("imageAlt", imageAlt);
   localStorage.setItem("specificApi", specificApi);
 }
-handleImageClick()
 // event to store data in local Storage end
 
 const sliders = document.querySelectorAll(".carousel");
